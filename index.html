@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Generate a <br /><span>Random Password</span></h1>
+      <div class="display">
+        <input type="text" id="password" placeholder="Password" />
+        <img src="https://shorturl.at/TRqbM" alt="lock icon" />
+      </div>
+      <button onclick="generatePassword()">
+        <img
+          src="https://shorturl.at/g0lsT"
+          alt="refresh icon"
+          onclick="copyPassword()"
+        />Generate Password
+      </button>
+    </div>
+    <script src="script.js">
+                    document.addEventListener('DOMContentLoaded', (event) => {
+          const passwordBox = document.getElementById("password");
+          const length = 16;
+
+          const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+          const numbers = "0123456789";
+          const specialCharacters = "!@#$%^&*()";
+          const allCharacters = upperCase + lowerCase + numbers + specialCharacters;
+
+          function generatePassword() {
+              let password = "";
+              password += upperCase[Math.floor(Math.random() * upperCase.length)];
+              password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+              password += numbers[Math.floor(Math.random() * numbers.length)];
+              password += specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
+
+              while (password.length < length) {
+                  password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
+              }
+              passwordBox.value = password;
+          }
+
+          function copyPassword() {
+              passwordBox.select();
+              document.execCommand("copy");
+          }
+
+          window.generatePassword = generatePassword;
+          window.copyPassword = copyPassword;
+      });
+    </script>
+  </body>
+</html>
